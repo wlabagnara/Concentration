@@ -5,6 +5,10 @@
 //  Created by William Labagnara on 1/26/19.
 //  Copyright © 2019 William Labagnara. All rights reserved.
 //
+// Reference:
+//   Stanford - Developing iOS 11 Apps with Swift - 1. Introduction to iOS 11, Xcode 9 and Swift 4
+//      https://youtu.be/TZL5AmwuwlA?list=PL3d_SFOiG7_8ofjyKzX6Nl1wZehbdiZC_
+//
 
 import UIKit
 
