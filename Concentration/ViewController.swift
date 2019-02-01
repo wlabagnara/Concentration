@@ -12,7 +12,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController
+{
     
     @IBOutlet var cardButtons: [UIButton]!
     
@@ -31,9 +32,8 @@ class ViewController: UIViewController {
             //print(" Cannot find card index of touched card!" )
         }
     }
-
-    var emojiChoices = ["👻","🎃","👻","🎃","😎","😎"]
     
+    // check the model to update the view accordingly
     func updateViewFromModel()
     {
         // review all the card buttons for updates and face up postion
@@ -55,23 +55,41 @@ class ViewController: UIViewController {
         }
     }
     
+    // property to count the times a card is flipped over
     var flipCount = 0
     {
-        didSet {
+        didSet { // property observer will update label in view
             flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
     
-    // Big 'Green Arrow' to the Model
+    // emoji choices that may be displayed on cards
+    var emojiChoices = ["🏳️","🏴","🏁","🇺🇸","🇮🇹","🇳🇱","🇱🇷","🇮🇪","🇧🇩"]
+    
+    var emoji = [Int : String]() // Dictionary to lookup emoji from index
+    
+    // lookup emoji from card ID
+    func emoji (for card: Card) -> String
+    {
+        // just-in-time creation of dictionary entry
+        //  lookup the emoji randomly, but then remove it
+        //  so that it is not used again!
+        if emoji[card.identifier] == nil, emojiChoices.count > 0  // if need an emoji and at least one is available
+        {
+            // pickup one of the available emojii randomly assign it to the dictionary
+            let randomEmoji = Int( arc4random_uniform(UInt32(emojiChoices.count)) )
+            emoji[card.identifier] = emojiChoices.remove(at: randomEmoji)
+        }
+        
+        return emoji[card.identifier] ?? "X" // return emoji or X if lookup failed
+    }
+    
+    // Controller ----> Model
     // initialize game for number of card pairs displayed
     //  round-up just in case there's an odd number of cards in view
     // note: make it lazy to avoid catch22 between property initializers
-    //       restriction is will not be able to use propery observer
+    //       restriction is that you will not be able to use propery observer
     lazy var game = Concentration(numPairOfCards: (cardButtons.count + 1) / 2)
-    
-    func emoji (for card: Card) -> String
-    {
-        return "?"
-    }
+
 }
 
