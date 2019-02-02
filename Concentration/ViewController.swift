@@ -22,10 +22,11 @@ class ViewController: UIViewController
     @IBAction func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.firstIndex(of: sender)
         {
+            flipCount += 1 // update flip count label
+
             //print(" Index of touched card is \(cardNumber)" )
             game.chooseCard(at: cardNumber) // Model will process card and
             updateViewFromModel();          //  is used to handle the game updates
-            flipCount += 1 // update flip count label
         }
         else
         {
@@ -44,13 +45,15 @@ class ViewController: UIViewController
             
             if card.isFaceUp
             {
+                // flip card face up
                 button.setTitle( emoji(for : card) , for: UIControl.State.normal )
                 button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
             else
             {
+                // flip card face down or if matched remove it
                 button.setTitle("", for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0) : #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
             }
         }
     }

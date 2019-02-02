@@ -57,7 +57,6 @@ class Concentration
                 cards[index].isFaceUp = true         // this is now the one and only face up card
                 indexOfOneAndOnlyFaceUpCard = index  //  set optional accordingly
             }
-            
         }
     }
     
