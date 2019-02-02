@@ -68,8 +68,19 @@ class Concentration
         {
             let card = Card()     // a unique card is created for each iteration
             cards += [card, card] // card array now has new card pair
-                                  // (TODO: won't both cards in pair have same ID?!)
-                                  //  i.e. - only one let (instantiation) done above, but need two?
+                                  // both cards in pair have same identifier
         }
+
+        // shuffle the cards!
+        var shuffledCards = cards // create temp array from class variable array
+        for index in 0..<cards.count
+        {
+            // randomly grab one of the cards and put it in the shuffled array
+            //   then remove it from cards so you don't add it twice
+            let randomIndex = Int( arc4random_uniform(UInt32(cards.count)) )
+            shuffledCards[index] = cards[randomIndex]
+            cards.remove(at: randomIndex)
+        }
+        cards = shuffledCards // copy shuffled cards back to class variable array
     }
 }
