@@ -19,10 +19,10 @@ class ViewController: UIViewController
     
     @IBOutlet weak var flipCountLabel: UILabel!
     
-    @IBAction func touchCard(_ sender: UIButton) {
+        @IBAction func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.firstIndex(of: sender)
         {
-            flipCount += 1 // update flip count label
+            flipCount += 1 // MARK: update flip count label
 
             //print(" Index of touched card is \(cardNumber)" )
             game.chooseCard(at: cardNumber) // Model will process card and

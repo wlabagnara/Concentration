@@ -71,6 +71,6 @@ class Concentration
                                   // both cards in pair have same identifier
         }
 
-        cards.shuffle() // shuffle the cards!
+        cards.shuffle() // MARK: shuffle the cards!
     }
 }

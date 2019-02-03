@@ -19,6 +19,7 @@
 /* Begin PBXFileReference section */
 		A907392A22023BDF007D2A74 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
 		A907392C22023C19007D2A74 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		A907392F22069724007D2A74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		A93B3C9B21FD13FC00EAC80A /* Concentration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Concentration.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A93B3C9E21FD13FC00EAC80A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A93B3CA021FD13FC00EAC80A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,11 +40,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A907392E22069723007D2A74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A907392F22069724007D2A74 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A93B3C9221FD13FC00EAC80A = {
 			isa = PBXGroup;
 			children = (
 				A93B3C9D21FD13FC00EAC80A /* Concentration */,
 				A93B3C9C21FD13FC00EAC80A /* Products */,
+				A907392E22069723007D2A74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
