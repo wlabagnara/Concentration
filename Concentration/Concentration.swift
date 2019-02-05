@@ -16,6 +16,41 @@ class Concentration
     // use an optional -- will be 'set' to the index of the one and only face up card
     //  otherwise, it is not set (will be nil)
     var indexOfOneAndOnlyFaceUpCard : Int?
+    {
+        get
+        {
+            // check all cards for face up and if only
+            //  one is face up, then return its index else
+            //  return nil
+            var foundIndex : Int? // optional gets free init to nil
+            
+            for index in cards.indices
+            {
+                if cards[index].isFaceUp
+                {
+                    if foundIndex == nil
+                    {
+                        foundIndex = index // found first faceUp card
+                    }
+                    else
+                    {
+                        return nil // found another face up card (therefore not one and only face up card)
+                    }
+                }
+            }
+            return foundIndex  // can be index of one and only face up card or nil if no face up cards
+        }
+        
+        set
+        {
+            // turn all cards face down except for the card
+            //  at newValue
+            for index in cards.indices
+            {
+                cards[index].isFaceUp = ( index == newValue )
+            }
+        }
+    }
     
     // process what happens when a card is chosen
     func chooseCard(at index: Int)
@@ -40,21 +75,11 @@ class Concentration
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched      = true
                 }
-                
-                cards[index].isFaceUp       = true
-                indexOfOneAndOnlyFaceUpCard = nil   // un-set optional
+                cards[index].isFaceUp = true
             }
             else
             {
                 // either no cards or two cards are face up
-                //  in this case turn all cards face down (doesn't matter if some are already face down)
-                //  and then turn selected card face up
-                for flipDownIndex in cards.indices
-                {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-
-                cards[index].isFaceUp = true         // this is now the one and only face up card
                 indexOfOneAndOnlyFaceUpCard = index  //  set optional accordingly
             }
         }

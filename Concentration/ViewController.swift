@@ -92,7 +92,12 @@ class ViewController: UIViewController
     //  round-up just in case there's an odd number of cards in view
     // note: make it lazy to avoid catch22 between property initializers
     //       restriction is that you will not be able to use propery observer
-    lazy var game = Concentration(numPairOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numPairOfCards: numPairOfCards)
 
+    // computed property for number of card pairs
+    var numPairOfCards : Int
+    {
+        return (cardButtons.count + 1) / 2  // read-only property
+    }
 }
 
