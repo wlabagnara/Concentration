@@ -35,7 +35,7 @@ class ViewController: UIViewController
     }
     
     // check the model to update the view accordingly
-    func updateViewFromModel()
+    private func updateViewFromModel()
     {
         // review all the card buttons for updates and face up postion
         for index in cardButtons.indices
@@ -59,7 +59,7 @@ class ViewController: UIViewController
     }
     
     // property to count the times a card is flipped over
-    var flipCount = 0
+    private var flipCount = 0
     {
         didSet { // property observer will update label in view
             flipCountLabel.text = "Flips: \(flipCount)"
@@ -67,24 +67,24 @@ class ViewController: UIViewController
     }
     
     // emoji choices that may be displayed on cards
-    var emojiChoices = ["🏳️","🏴","🏁","🇺🇸","🇮🇹","🇳🇱","🇱🇷","🇮🇪","🇧🇩"]
+    private var emojiChoices = ["🏳️","🏴","🏁","🇺🇸","🇮🇹","🇳🇱","🇱🇷","🇮🇪","🇧🇩"]
     
-    var emoji = [Int : String]() // Dictionary to lookup emoji from index
+    private var emoji = [Card : String]() // Dictionary to lookup emoji from index
     
     // lookup emoji from card ID
-    func emoji (for card: Card) -> String
+    private func emoji (for card: Card) -> String
     {
         // just-in-time creation of dictionary entry
         //  lookup the emoji randomly, but then remove it
         //  so that it is not used again!
-        if emoji[card.identifier] == nil, emojiChoices.count > 0  // if need an emoji and at least one is available
+        if emoji[card] == nil, emojiChoices.count > 0  // if need an emoji and at least one is available
         {
             // pickup one of the available emojii randomly assign it to the dictionary
             let randomEmoji = Int( arc4random_uniform(UInt32(emojiChoices.count)) )
-            emoji[card.identifier] = emojiChoices.remove(at: randomEmoji)
+            emoji[card] = emojiChoices.remove(at: randomEmoji)
         }
         
-        return emoji[card.identifier] ?? "X" // return emoji or X if lookup failed
+        return emoji[card] ?? "X" // return emoji or X if lookup failed
     }
     
     // Controller ----> Model
@@ -95,7 +95,7 @@ class ViewController: UIViewController
     lazy var game = Concentration(numPairOfCards: numPairOfCards)
 
     // computed property for number of card pairs
-    var numPairOfCards : Int
+    private var numPairOfCards : Int
     {
         return (cardButtons.count + 1) / 2  // read-only property
     }

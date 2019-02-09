@@ -1,6 +1,6 @@
 //
 //  Concentration.swift
-//  Concentration
+//  Concentration - A program to play the game Concentration
 //
 //  Created by William Labagnara on 1/30/19.
 //  Copyright © 2019 William Labagnara. All rights reserved.
@@ -8,20 +8,19 @@
 
 import Foundation
 
-class Concentration
+struct Concentration
 {
     var cards = [Card]() // array of cards for game
 
     // very important to track when one card is already face up
-    // use an optional -- will be 'set' to the index of the one and only face up card
-    //  otherwise, it is not set (will be nil)
-    var indexOfOneAndOnlyFaceUpCard : Int?
+    // use an optional -- will be 'set' to the index of the one and only
+    //  face up card; otherwise, it is not set (will be nil)
+    private var indexOfOneAndOnlyFaceUpCard : Int?
     {
         get
         {
-            // check all cards for face up and if only
-            //  one is face up, then return its index else
-            //  return nil
+            // check all cards for face up and if only one is
+            //  face up, then return its index else return nil
             var foundIndex : Int? // optional gets free init to nil
             
             for index in cards.indices
@@ -53,15 +52,15 @@ class Concentration
     }
     
     // process what happens when a card is chosen
-    func chooseCard(at index: Int)
+    mutating func chooseCard(at index: Int)
     {
         // ignore a card that already has been matched
         if !cards[index].isMatched
         {
             // there are three possibilities
-            // 1. No cards are face up   --> just flip over chosen card
-            // 2. Two cards are face up  --> flip face up cards to face down and flip chosen card
-            // 3. One card is face up    --> now need to check for match
+            //  1. No cards are face up   --> case 1 or 2: just set indexOfOneAndOnlyFaceUpCard
+            //  2. Two cards are face up
+            //  3. One card is face up    --> check for match with card that was just selected (but still face down)
             
             // matchIndex will be set to the one and only face up card index or it will be nil
             //  also making sure that matchIndex is not the same index of the card you chose (i.e. if there
@@ -70,7 +69,7 @@ class Concentration
             if let matchIndex = indexOfOneAndOnlyFaceUpCard , matchIndex != index
             {
                 // check if cards match
-                if cards[matchIndex].identifier == cards[index].identifier
+                if cards[matchIndex] == cards[index]
                 {
                     cards[matchIndex].isMatched = true
                     cards[index].isMatched      = true
