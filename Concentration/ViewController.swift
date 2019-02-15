@@ -80,7 +80,7 @@ class ViewController: UIViewController
         if emoji[card] == nil, emojiChoices.count > 0  // if need an emoji and at least one is available
         {
             // pickup one of the available emojii randomly assign it to the dictionary
-            let randomEmoji = Int( arc4random_uniform(UInt32(emojiChoices.count)) )
+            let randomEmoji = emojiChoices.count.arc4random
             emoji[card] = emojiChoices.remove(at: randomEmoji)
         }
         
@@ -98,6 +98,19 @@ class ViewController: UIViewController
     private var numPairOfCards : Int
     {
         return (cardButtons.count + 1) / 2  // read-only property
+    }
+}
+
+extension Int {
+    var arc4random : Int {
+        
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(self)))
+        } else {
+            return 0
+        }
     }
 }
 
