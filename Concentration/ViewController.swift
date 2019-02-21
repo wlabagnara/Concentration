@@ -67,7 +67,7 @@ class ViewController: UIViewController
     }
     
     // emoji choices that may be displayed on cards
-    private var emojiChoices = ["🏳️","🏴","🏁","🇺🇸","🇮🇹","🇳🇱","🇱🇷","🇮🇪","🇧🇩"]
+    private var emojiChoices = "🏳️🏴🏁🇺🇸🇮🇹🇳🇱🇱🇷🇮🇪🇧🇩"
     
     private var emoji = [Card : String]() // Dictionary to lookup emoji from index
     
@@ -80,8 +80,9 @@ class ViewController: UIViewController
         if emoji[card] == nil, emojiChoices.count > 0  // if need an emoji and at least one is available
         {
             // pickup one of the available emojii randomly assign it to the dictionary
-            let randomEmoji = emojiChoices.count.arc4random
-            emoji[card] = emojiChoices.remove(at: randomEmoji)
+            let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
+            // let randomEmoji = emojiChoices.count.arc4random
+            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
         
         return emoji[card] ?? "X" // return emoji or X if lookup failed
