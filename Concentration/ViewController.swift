@@ -15,11 +15,14 @@ import UIKit
 class ViewController: UIViewController
 {
     
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        didSet {
+            updateFlipCountLabel() }
+    }
     
-        @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.firstIndex(of: sender)
         {
             flipCount += 1 // MARK: update flip count label
@@ -59,13 +62,21 @@ class ViewController: UIViewController
     }
     
     // property to count the times a card is flipped over
-    private var flipCount = 0
+    private(set) var flipCount = 0
     {
         didSet { // property observer will update label in view
-            flipCountLabel.text = "Flips: \(flipCount)"
+            updateFlipCountLabel()
         }
     }
     
+    // update the flip count label
+    private func updateFlipCountLabel () {
+        let attributes : [NSAttributedString.Key : Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor : UIColor.orange]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
+    }
     // emoji choices that may be displayed on cards
     private var emojiChoices = "🏳️🏴🏁🇺🇸🇮🇹🇳🇱🇱🇷🇮🇪🇧🇩"
     

@@ -19,25 +19,9 @@ struct Concentration
     {
         get
         {
-            // check all cards for face up and if only one is
+            // check (filter) all cards for face up and if only one is
             //  face up, then return its index else return nil
-            var foundIndex : Int? // optional gets free init to nil
-            
-            for index in cards.indices
-            {
-                if cards[index].isFaceUp
-                {
-                    if foundIndex == nil
-                    {
-                        foundIndex = index // found first faceUp card
-                    }
-                    else
-                    {
-                        return nil // found another face up card (therefore not one and only face up card)
-                    }
-                }
-            }
-            return foundIndex  // can be index of one and only face up card or nil if no face up cards
+            return cards.indices.filter{ cards[$0].isFaceUp }.oneAndOnly
         }
         
         set
@@ -96,5 +80,12 @@ struct Concentration
         }
 
         cards.shuffle() // MARK: shuffle the cards!
+    }
+}
+
+// extension of collection that will provide the one and only element in a collection
+extension Collection {
+    var oneAndOnly : Element? {
+        return count == 1 ? first : nil // count and first are from collection
     }
 }
